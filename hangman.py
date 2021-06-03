@@ -9,7 +9,7 @@ import random
 import os
 import time
 import word_list
-#from colorama import Fore
+#from colorama import fore  -> cn't download in my computer
 
 '''FUNCTIONS g_m TO g_p FOR HANG MAN'''
 def g_m(i):
@@ -87,7 +87,8 @@ def g_p():
 def head(i):
     print(f'''------------------------------------------------
     -
-                    HANG MAN
+                    
+                ✮｡  🎀  𝐻𝒜𝒩𝒢 𝑀𝒜𝒩  🎀  ｡✮
 
 --------------- ATTEMPT = {i} of 4-----------------\n\n''')
 
@@ -121,7 +122,7 @@ i = 1
 result = False
 
 ''' WHILE LOOP THAT REPEATE 4 TIMES '''
-while 4>i:
+while 4>=i:
     if i-1 != 0:
       head(i)
     i = i+1
@@ -135,21 +136,21 @@ while 4>i:
     
     if limit<temp_size:
         g_m(i)
-        if i==4:
+        if i>4:
           print("\nNIRTTHI VERAVALLA PANIKKUM PODO\n")    #PRINT WHEN FAILE
         else:
          print(f"""Breaked limit (only {limit} letters needed""")
 
     elif limit>temp_size:
         g_m(i)
-        if i==4:
+        if i>4:
           print("\nNIRTTHI VERAVALLA PANIKKUM PODO\n")
         else:
           print(f"""\n\n{limit} letters needed""")
 
     elif word==temp:         # WORKS WHEN THE GUESSED WORD IS CORRECT
         g_p()
-        if i==4:
+        if i>4:
           print("\nNIRTTHI VERAVALLA PANIKKUM PODO\n")
         else:
           result = True
@@ -158,14 +159,14 @@ while 4>i:
         
     elif limit==temp_size:
          g_m(i)
-         if i==4:
+         if i>4:
            print("\nNIRTTHI VERAVALLA PANIKKUM PODO\n")
          else:  
            print('\n', ans, "\n")
            print(f'''\nKEEP GOING\n''')
     else:
         g_m(i)
-        if i==4:
+        if i>4:
             print("\nNIRTTHI VERAVALLA PANIKKUM PODO\n")
         else:
            print(f'''\nKEEP GOING       {limit} letters needed\n''')
@@ -183,7 +184,7 @@ while 4>i:
     else:
         break
 
-    if i==4:
+    if i>4:
         print("\n\n THINK \n\n")
 
 
