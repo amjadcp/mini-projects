@@ -11,6 +11,7 @@ import time
 import word_list
 #from colorama import Fore
 
+'''FUNCTIONS g_m TO g_p FOR HANG MAN'''
 def g_m(i):
     if i==2:
         g_2()
@@ -19,7 +20,8 @@ def g_m(i):
     elif i==4:
         g_4()
     else:
-        g_p()
+       None
+
     
 
 def g_1():
@@ -95,6 +97,7 @@ def answer(word, limit):
     tem = []
     temp = ""
     Guess = input("Guess the word : ")
+    os.system("cls")
     guess = Guess.upper()
     for char in guess:
         if char in word:
@@ -107,59 +110,84 @@ def answer(word, limit):
     
 
 
-head(1)
-g_1()
+head(1) #FIRST TIME HEAD CALLING
+g_1()    #g_1 CALLING
 words = ["apple", "banana", "pappaya", "car", "bike"]
-Word = random.choice(words)
-word = Word.upper()
+Word = random.choice(words)    # RANDOM SELECTION
+word = Word.upper()            # UPPER CASE CONVERTION
 limit = len(word)
 print("\n\n", " _ " * limit, "\n\n")
 i = 1
 result = False
 
-while 5>i:
+''' WHILE LOOP THAT REPEATE 4 TIMES '''
+while 4>i:
     if i-1 != 0:
       head(i)
-      
-    
+    i = i+1
     temp = answer(word, limit)
     ans = ''
     
     for ch in temp:
       ans = ans + ch + ' '
    
-
     temp_size = len(temp)
     
     if limit<temp_size:
-        print(f"""Breaked limit (only {limit} letters needed""")
         g_m(i)
+        if i==4:
+          print("\nNIRTTHI VERAVALLA PANIKKUM PODO\n")    #PRINT WHEN FAILE
+        else:
+         print(f"""Breaked limit (only {limit} letters needed""")
 
     elif limit>temp_size:
-        print(f"""{limit} letters needed""")
         g_m(i)
+        if i==4:
+          print("\nNIRTTHI VERAVALLA PANIKKUM PODO\n")
+        else:
+          print(f"""\n\n{limit} letters needed""")
 
-    elif limit==temp==word:
+    elif word==temp:         # WORKS WHEN THE GUESSED WORD IS CORRECT
         g_p()
-        result = True
-        print("YOU ARE MY LIFE SAVER")
-        print(ans)
-    elif limit==temp:
-         print(f'''KEEP GOING''')
-    
+        if i==4:
+          print("\nNIRTTHI VERAVALLA PANIKKUM PODO\n")
+        else:
+          result = True
+          print('\n', ans, '\n')
+          print("\nYOU ARE MY LIFE SAVER\n")
+        
+    elif limit==temp_size:
+         g_m(i)
+         if i==4:
+           print("\nNIRTTHI VERAVALLA PANIKKUM PODO\n")
+         else:  
+           print('\n', ans, "\n")
+           print(f'''\nKEEP GOING\n''')
     else:
-        print(f'''KEEP GOING       {limit} letters needed''')
         g_m(i)
+        if i==4:
+            print("\nNIRTTHI VERAVALLA PANIKKUM PODO\n")
+        else:
+           print(f'''\nKEEP GOING       {limit} letters needed\n''')
         
 
     if result==True:
-        break   
+      break           # BREAKING THE WHILE LOOP WHEN GET CORRECT ANSWER
    
-    time.sleep(5)
-    os.system("cls") # in ubundu cls -> clear
     print(f"""HINT : {limit} letters needed""")
-    i = i+1
+    op = input("CONTINUE : (y/N)" )
+    if op.upper()=='Y':
+      os.system("cls")   # in ubundu cls -> clear
+      print(f"""HINT : {limit} letters needed""")
 
-print("NIRTTHI VERAVALLA PANIKKUM PODO")
+    else:
+        break
+
+    if i==4:
+        print("\n\n THINK \n\n")
+
+
+    
+
     
 
