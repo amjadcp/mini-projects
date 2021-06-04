@@ -1,14 +1,15 @@
 '''
 Author : Amjad
 Date   : 3 JUN 2021 11.30 PM
-About  : Hang man game using PYTHON
+About  : Hang man game using PYTHON (open terminal in full screen)
 '''
 
 #IMPORTED PYTHON LIBRARIES
 import random
 import os
 import time
-import word_list
+from word_list import fruits, currencies, countries, states
+import sys
 #from colorama import fore  -> cn't download in my computer
 
 '''FUNCTIONS g_m TO g_p FOR HANG MAN'''
@@ -25,72 +26,79 @@ def g_m(i):
     
 
 def g_1():
-    print(f'''--------------
-|            |            
-|            o
-|
-|
-|
-|
-|
-|''')
+    print(f'''
+==============
+||//         |            
+||           o
+||
+||
+||
+||
+||
+||''')
 
 def g_2():
-     print(f'''--------------
-|            |            
-|            0
-|           
-|            
-|           
-|
-|
-|''')
+     print(f'''
+==============
+||//         |            
+||           0
+||           
+||            
+||           
+||
+||
+||''')
 
 def g_3():
-     print(f'''--------------
-|            |            
-|            0
-|           /|\\
-|            
-|           
-|
-|
-|''')
+     print(f'''
+==============
+||//         |            
+||           0
+||          /|\\
+||            
+||           
+||
+||
+||''')
 
 def g_4():
-     print(f'''--------------
-|            |            
-|            0
-|           /|\\
-|            |
-|           / \\
-|
-|
-|''')
+     print(f'''
+==============
+||//         |            
+||           0
+||          /|\\
+||           |
+||          / \\
+||
+||
+||''')
 
 def g_p():
-     print(f'''--------------
-|            |            
-|            o
-|           
-|            
-|            0
-|           /|\\
-|            |
-|           / \\''')
+     print(f'''
+==============
+||//         |            
+||           o
+||           
+||            
+||           0
+||          /|\\
+||           |
+||          / \\''')
 
 
 
 
 
 #A FUNCTION TO PRINT HEADING WITH SHOWING ATTEMPT
-def head(i):
-    print(f'''------------------------------------------------
-    -
+def head(i, topic):
+    print(f'''
+    
+----------------{topic}----------------------------
+    
                     
                 ✮｡  🎀  𝐻𝒜𝒩𝒢 𝑀𝒜𝒩  🎀  ｡✮
 
---------------- ATTEMPT = {i} of 4-----------------\n\n''')
+--------------- ATTEMPT = {i} of 4--------------------------''' + "\n\n")
 
 # a function to check the answer
 def answer(word, limit):
@@ -109,22 +117,110 @@ def answer(word, limit):
     
     return temp.join(tem)
     
+def menu(Word, op):
+    topic = ''
+    fruits=[
+              "Abiu",
+              "Açaí",
+              "Acerola",
+              "Ackee",
+              "Africancucumber",
+              "Apricot",
+              "Avocado",
+              "Banana",
+              "Bilberry",
+              "Blackberry",
+              "Blackcurrant",
+              "Blacksapote",
+              "Blueberry",
+              "Boysenberry",
+              "Breadfruit"
+           ]
+
+    countries=[
+              
+              "afghanistan",
+              "albania",
+              "Argentina",
+              "america",
+              "brazil",
+              "Australia",
+              "india",
+              "pakistan",
+              "chaina"
+              ]
+
+    currencies = [
+        
+                    "afghani",
+                    "euro",
+                    "colon",
+                    "crown",
+                    "rupee",
+                    "doller",
+                    "dalasi",
+                    "dinar",
+                    "kina",
+                    "kuna"
+                 ]
+
+    states =[
+    
+                  "bihar",
+                  "kerala",
+                  "karnadaka",
+                  "thamizhndu",
+                  "manipur",
+                  "mizoram"
+              ]   
+
+    print(f'''-------------HANGER MAN TOPIC MENU-------------
+              1. ABOUT FRUITS
+              2. ABOUT COUNTRIES
+              3. ABOUT CURRENCIES
+              4. ABOUT STATES''')
+    name = input("Good name please : ")
+    op = int(input("Option :"))
+    
+    if op == 1:
+       Word = random.choice(fruits)
+       topic = 'Guess the FRUITS'
+    elif op == 2:
+       Word =random.choice(countries)
+       topic = "Guess the COUNTRY"
+    elif op == 3:
+       Word = random.choice(currencies)
+       topic = "Guess the CURRENCY"
+    elif op == 4:
+       Word = random.choice(states)
+       topic = "Guess the STATE"
+    else:
+       print("Wrrong choice")
+       sys.exit()
+    print(f'''Hi, {name.upper()} best of luck !''')
+    time.sleep(1)
+    os.system("cls")  # in ubundu cls -> clear
+    return Word, topic
 
 
-head(1) #FIRST TIME HEAD CALLING
+
+
+
+
+Word, topic = menu("", 0)
+head(1, topic) #FIRST TIME HEAD CALLING
 g_1()    #g_1 CALLING
-words = ["apple", "banana", "pappaya", "car", "bike"]
-Word = random.choice(words)    # RANDOM SELECTION
 word = Word.upper()            # UPPER CASE CONVERTION
 limit = len(word)
-print("\n\n", " _ " * limit, "\n\n")
+print(f'''\n\nTopic : {topic} \n''')
+print("WORD :", " _ " * limit, "\n\n")
 i = 1
 result = False
 
 ''' WHILE LOOP THAT REPEATE 4 TIMES '''
-while 4>=i:
+while 4>i:
     if i-1 != 0:
-      head(i)
+      head(i, topic)
     i = i+1
     temp = answer(word, limit)
     ans = ''
@@ -136,37 +232,37 @@ while 4>=i:
     
     if limit<temp_size:
         g_m(i)
-        if i>4:
-          print("\nNIRTTHI VERAVALLA PANIKKUM PODO\n")    #PRINT WHEN FAILE
+        if i>3:
+          print("\n NIRTHI VERENTHELUM PANIKKE PODO \n")    #PRINT WHEN FAILE
         else:
          print(f"""Breaked limit (only {limit} letters needed""")
 
     elif limit>temp_size:
         g_m(i)
-        if i>4:
-          print("\nNIRTTHI VERAVALLA PANIKKUM PODO\n")
+        if i>3:
+          print("\n NIRTHI VERENTHELUM PANIKKE PODO \n")
         else:
           print(f"""\n\n{limit} letters needed""")
 
     elif word==temp:         # WORKS WHEN THE GUESSED WORD IS CORRECT
         g_p()
-        if i>4:
-          print("\nNIRTTHI VERAVALLA PANIKKUM PODO\n")
+        if i>3:
+          print("\n NIRTHI VERENTHELUM PANIKKE PODO \n")
         else:
           result = True
-          print('\n', ans, '\n')
+          print('\n\nWord :', ans, '\n')
           print("\nYOU ARE MY LIFE SAVER\n")
         
     elif limit==temp_size:
          g_m(i)
-         if i>4:
-           print("\nNIRTTHI VERAVALLA PANIKKUM PODO\n")
+         if i>3:
+           print("\n NIRTHI VERENTHELUM PANIKKE PODO \n")
          else:  
-           print('\n', ans, "\n")
+           print('\n\nWord :', ans, "\n")
            print(f'''\nKEEP GOING\n''')
     else:
         g_m(i)
-        if i>4:
+        if i>3:
             print("\nNIRTTHI VERAVALLA PANIKKUM PODO\n")
         else:
            print(f'''\nKEEP GOING       {limit} letters needed\n''')
@@ -177,14 +273,16 @@ while 4>=i:
    
     print(f"""HINT : {limit} letters needed""")
     op = input("CONTINUE : (y/N)" )
-    if op.upper()=='Y':
+    if op.upper()=='Y' and i<3:
       os.system("cls")   # in ubundu cls -> clear
-      print(f"""HINT : {limit} letters needed""")
-
+      print(f"""HINT : {limit} letters needed\n\n""")
+    elif op.upper()=='N' and i<3:
+      print("K BEY")
+      break
     else:
-        break
+        print("wrong selection")
 
-    if i>4:
+    if i>3:
         print("\n\n THINK \n\n")
 
 
